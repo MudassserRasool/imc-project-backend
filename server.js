@@ -17,7 +17,7 @@ app.use('/api/orders', orderRouter);
 mongoose
   .connect(MONGO_URL)
   .then(() => {
-    app.listen(PORT, () => {
+    app.listen(process.env.PORT || PORT, () => {
       console.log(`Connected to mongodb and running on port ${PORT}`);
     });
   })
