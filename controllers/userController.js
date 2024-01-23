@@ -2,13 +2,12 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import validator from 'validator';
-import { JWT_SECRET_KEY } from '../config/config.js';
 import userModel from '../models/userModel.js';
 
 // function to generate token
 
 const generateToken = (_id) => {
-  return jwt.sign({ _id }, JWT_SECRET_KEY, { expiresIn: '3d' });
+  return jwt.sign({ _id }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
 };
 
 // login user controller to save user data in mongoose database
@@ -102,4 +101,52 @@ const getRegistrationInfo = async (req, res) => {
   }
 };
 
-export { getRegistrationInfo, loginUser, registerUser };
+// update the registration info of currently registered user
+
+const updateRegistrationInfo = async (req, res) => {
+  const { email } = req.params;
+  const { name, address, phone } = req.body;
+  try {
+    const user = await userModel.findOneAndUpdate(
+      { email },
+      { name, address, phone }
+    );
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// get all users
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await userModel.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+// delete user by id
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  // if (mongoose.Types.ObjectId.isValid(id)) {
+  //   return res.status(404).send(`No user with id: ${id}`);
+  // }
+  try {
+    const user = await userModel.find();
+    await userModel.findByIdAndDelete(id);
+    res.json({ message: 'User deleted successfully.' + user });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export {
+  deleteUser,
+  getAllUsers,
+  getRegistrationInfo,
+  loginUser,
+  registerUser,
+  updateRegistrationInfo,
+};
