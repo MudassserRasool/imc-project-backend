@@ -1,53 +1,19 @@
-// import jwt from 'jsonwebtoken';
-// import User from '../models/userModel.js';
+import jwt from 'jsonwebtoken';
+import User from '../models/userModel.js';
 
-// export const requireAuth = async (req, res, next) => {
-//   const { authorization } = req.headers;
-//   if (!authorization) {
-//     return res.status(401).json({ error: 'You must be logged in' });
-//   }
-//   const token = authorization.split(' ')[1];
-
-//   try {
-//     const { _id } = jwt.verify(token, process.env.JWT_SECRET_KEY);
-//     const user = await User.findById(_id);
-//     req.user = user; // requested user that match the id in the token part of the header of second part of the token, like the id of the user that is logged in, the token format is like this: Bearer token and it have 3 parts which are: 1-Bearer 2-token 3-id of the user that is logged in, so we can get the id of the user that is logged in by using the third part of the token.
-//     next();
-//   } catch (err) {
-//     return res.status(401).json({ error: 'You must be logged in' });
-//   }
-// };
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true,
-});
-exports.requireAuth = void 0;
-var _jsonwebtoken = _interopRequireDefault(require('jsonwebtoken'));
-var _userModel = _interopRequireDefault(require('../models/userModel.js'));
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-const requireAuth = async (req, res, next) => {
+export const requireAuth = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
-    return res.status(401).json({
-      error: 'You must be logged in',
-    });
+    return res.status(401).json({ error: 'You must be logged in' });
   }
   const token = authorization.split(' ')[1];
+
   try {
-    const { _id } = _jsonwebtoken.default.verify(
-      token,
-      process.env.JWT_SECRET_KEY
-    );
-    const user = await _userModel.default.findById(_id);
+    const { _id } = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const user = await User.findById(_id);
     req.user = user; // requested user that match the id in the token part of the header of second part of the token, like the id of the user that is logged in, the token format is like this: Bearer token and it have 3 parts which are: 1-Bearer 2-token 3-id of the user that is logged in, so we can get the id of the user that is logged in by using the third part of the token.
     next();
   } catch (err) {
-    return res.status(401).json({
-      error: 'You must be logged in',
-    });
+    return res.status(401).json({ error: 'You must be logged in' });
   }
 };
-exports.requireAuth = requireAuth;

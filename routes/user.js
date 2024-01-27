@@ -1,28 +1,29 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true,
-});
-exports.default = void 0;
-var _express = require('express');
-var _userController = require('../controllers/userController.js');
-const router = (0, _express.Router)();
+import { Router } from 'express';
+import {
+  deleteUser,
+  getAllUsers,
+  getRegistrationInfo,
+  loginUser,
+  registerUser,
+  updateRegistrationInfo,
+} from '../controllers/userController.js';
+const router = Router();
 
 // login user
-router.post('/login', _userController.loginUser);
+router.post('/login', loginUser);
 
 // register user
-router.post('/register', _userController.registerUser);
+router.post('/register', registerUser);
 
 // get information of current user
-router.get('/current/:email', _userController.getRegistrationInfo);
+router.get('/current/:email', getRegistrationInfo);
 
 // update the registration info of currently registered user
-router.patch('/current/:email', _userController.updateRegistrationInfo);
+router.patch('/current/:email', updateRegistrationInfo);
 
 // get all users
-router.get('/', _userController.getAllUsers);
+router.get('/', getAllUsers);
 
 // delete user by id
-router.delete('/:id', _userController.deleteUser);
-var _default = (exports.default = router);
+router.delete('/:id', deleteUser);
+export default router;
