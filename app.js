@@ -52,7 +52,7 @@ app.use('/api/orders', _order.default);
 _mongoose.default
   .connect(process.env.MONGODB_URI)
   .then(() => {
-    app.listen(process.env.PORT, () => {
+    app.listen(process.env.PORT || 3000, () => {
       console.log(
         `Connected to mongodb and running on port ${process.env.PORT}`
       );
