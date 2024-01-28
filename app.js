@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import orderRouter from './routes/order.js';
-// import userRouter from './routes/user.js';
+import userRouter from './routes/user.js';
 import workoutRouter from './routes/workout.js';
 const app = express();
 app.use(express.json());
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 app.use('/api/workouts', workoutRouter);
-// app.use('/api/users', userRouter);
+app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 
 mongoose
