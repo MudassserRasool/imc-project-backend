@@ -4,7 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import orderRouter from './routes/order.js';
 // import router from './routes/user.js';
-// import workoutRouter from './routes/workout.js';
+import workoutRouter from './routes/workout.js';
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -12,7 +12,7 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
-// app.use('/api/workouts', workoutRouter);
+app.use('/api/workouts', workoutRouter);
 // app.use('/api/users', router);
 app.use('/api/orders', orderRouter);
 
