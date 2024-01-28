@@ -1,29 +1,28 @@
 import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
+import http from 'http';
 import mongoose from 'mongoose';
 import orderRouter from './routes/order.js';
 import router from './routes/user.js';
 import workoutRouter from './routes/workout.js';
 const app = express();
+const server = http.createServer(app);
 app.use(express.json());
 app.use(cors());
-// ssh -i "foode.pem" ec2-user@ec2-35-78-93-153.ap-northeast-1.compute.amazonaws.com
-// scp -i "foode.pem" -r ./ ec2-user@ec2-35-78-93-153.ap-northeast-1.compute.amazonaws.com
+const port = process.env.PORT || 3000;
+mongoose.connect(
+  'mongodb://mern2022:mern2022@ac-1vocr4t-shard-00-00.43aaypx.mongodb.net:27017,ac-1vocr4t-shard-00-01.43aaypx.mongodb.net:27017,ac-1vocr4t-shard-00-02.43aaypx.mongodb.net:27017/?ssl=true&replicaSet=atlas-x4e2nh-shard-0&authSource=admin&retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 app.use('/api/workouts', workoutRouter);
 app.use('/api/users', router);
 app.use('/api/orders', orderRouter);
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log(
-        `Connected to mongodb and running on port ${process.env.PORT}`
-      );
-    });
-  })
-  .catch((err) => {
-    console.log('mong error = ' + err.message);
-  });
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
