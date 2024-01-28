@@ -10,7 +10,7 @@ import { Router } from 'express';
 const router = Router();
 
 // login user
-router.post('/login', (req, res) => {
+router.get('/login', (req, res) => {
   res.send('login');
 });
 
