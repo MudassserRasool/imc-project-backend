@@ -1,16 +1,18 @@
 import { Router } from 'express';
-import {
-  // deleteUser,
-  // getAllUsers,
-  // getRegistrationInfo,
-  loginUser,
-  // registerUser,
-  // updateRegistrationInfo,
-} from '../controllers/userController.js';
+// import {
+//   // deleteUser,
+//   // getAllUsers,
+//   // getRegistrationInfo,
+//   loginUser,
+//   // registerUser,
+//   // updateRegistrationInfo,
+// } from '../controllers/userController.js';
 const router = Router();
 
 // login user
-router.post('/login', loginUser);
+router.post('/login', (req, res) => {
+  res.send('login');
+});
 
 // register user
 // router.post('/register', registerUser);
