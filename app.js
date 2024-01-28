@@ -11,7 +11,7 @@ app.get('/hello', (req, res) => {
 });
 // app.use('/api/workouts', workoutRouter);
 // app.use('/api/users', router);
-// app.use('/api/orders', orderRouter);
+app.use('/api/orders', orderRouter);
 
 mongoose
   .connect(process.env.MONGODB_URI)
