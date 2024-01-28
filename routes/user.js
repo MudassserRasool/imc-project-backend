@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import {
-  // deleteUser,
   // getAllUsers,
   // getRegistrationInfo,
-  loginUser,
+  // loginUser,
+  deleteUser,
 } from '../controllers/userController.js';
 const router = Router();
 
 // login user
-router.post('/login', loginUser);
+// router.post('/login', loginUser);
 
 // register user
 // router.post('/register', registerUser);
@@ -23,5 +23,5 @@ router.post('/login', loginUser);
 // router.get('/', getAllUsers);
 
 // delete user by id
-// router.delete('/:id', deleteUser);
+router.delete('/:id', deleteUser);
 export default router;
