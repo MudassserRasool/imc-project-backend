@@ -1,8 +1,8 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
-import validator from 'validator';
-import userModel from '../models/userModel.js';
+// import bcrypt from 'bcrypt';
+// import jwt from 'jsonwebtoken';
+// import mongoose from 'mongoose';
+// import validator from 'validator';
+// import userModel from '../models/userModel.js';
 
 // function to generate token
 
@@ -12,30 +12,31 @@ const generateToken = (_id) => {
 
 // login user controller to save user data in mongoose database
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  // const { email, password } = req.body;
 
-  // found user with respect to email entered by user
-  const user = await userModel.findOne({ email });
+  // // found user with respect to email entered by user
+  // const user = await userModel.findOne({ email });
 
-  if (!user) {
-    return res.status(401).send({ message: 'Invalid User Email' });
-  }
+  // if (!user) {
+  //   return res.status(401).send({ message: 'Invalid User Email' });
+  // }
 
-  try {
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (isMatch && user.email === email) {
-      const token = generateToken(user._id); // passing id of matched user to generate token
-      res.status(200).send({
-        message: 'Congratulation you have scuessfully login',
-        user: user.email,
-        token,
-      });
-    } else {
-      res.status(401).send({ message: 'Invalid Password' });
-    }
-  } catch (error) {
-    res.status(401).send({ message: 'Enter all input fields' });
-  }
+  // try {
+  //   const isMatch = await bcrypt.compare(password, user.password);
+  //   if (isMatch && user.email === email) {
+  //     const token = generateToken(user._id); // passing id of matched user to generate token
+  //     res.status(200).send({
+  //       message: 'Congratulation you have scuessfully login',
+  //       user: user.email,
+  //       token,
+  //     });
+  //   } else {
+  //     res.status(401).send({ message: 'Invalid Password' });
+  //   }
+  // } catch (error) {
+  //   res.status(401).send({ message: 'Enter all input fields' });
+  // }
+  res.send('Hello login!');
 };
 
 // register user controller to save user data in mongoose database and bycrypt password as well
