@@ -1,8 +1,8 @@
-// import bcrypt from 'bcrypt';
-// import jwt from 'jsonwebtoken';
-// import mongoose from 'mongoose';
-// import validator from 'validator';
-// import userModel from '../models/userModel.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+import validator from 'validator';
+import userModel from '../models/userModel.js';
 
 // function to generate token
 
