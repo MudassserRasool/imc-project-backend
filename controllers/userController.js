@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt'; // vercel is not supporting it so use olde rversion or js-sha512
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import validator from 'validator';
@@ -36,7 +36,6 @@ const loginUser = async (req, res) => {
   } catch (error) {
     res.status(401).send({ message: 'Enter all input fields' });
   }
-  res.send('Hello login!');
 };
 
 // register user controller to save user data in mongoose database and bycrypt password as well
