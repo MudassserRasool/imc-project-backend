@@ -4,7 +4,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import customerRouter from './routes/coustomer.js';
 import orderRouter from './routes/order.js';
-import userRouter from './routes/user.js';
 import workoutRouter from './routes/workout.js';
 
 const app = express();
@@ -17,7 +16,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 app.use('/api/workouts', workoutRouter);
-app.use('/api/users', userRouter);
+// app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/customers', customerRouter);
 // app.use('/api/doctor', doctorRouter);
