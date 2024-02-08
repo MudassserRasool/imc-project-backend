@@ -40,11 +40,11 @@ const loginUser = async (req, res) => {
 
 // register user controller to save user data in mongoose database and bycrypt password as well
 const registerUser = async (req, res) => {
-  const { name, email, address, phone, password } = req.body;
+  const { name, email, phone, password, role } = req.body;
 
   // send toke
   //check that if user have entered both email and password
-  if (!name || !email || !address || !phone || !password) {
+  if (!name || !email || !phone || !password || !role) {
     return res.status(401).send({ message: 'Enter all input fields' });
   }
 
@@ -72,16 +72,16 @@ const registerUser = async (req, res) => {
     const user = new userModel({
       name,
       email,
-      address,
       phone,
       password: hash,
+      role,
     });
     await user.save();
     const token = generateToken(user._id);
 
     res
       .status(200)
-      .send({ name, email, address, phone, token, message: 'User Registered' });
+      .send({ name, email, phone, token, message: 'User Registered' });
   } catch (error) {
     res.status(400).send({ message: error.message });
   }
