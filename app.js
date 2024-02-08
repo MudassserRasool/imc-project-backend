@@ -2,7 +2,6 @@ import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
-import customerRouter from './routes/coustomer.js';
 import orderRouter from './routes/order.js';
 import workoutRouter from './routes/workout.js';
 
@@ -18,7 +17,7 @@ app.get('/', (req, res) => {
 app.use('/api/workouts', workoutRouter);
 // app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
-app.use('/api/customers', customerRouter);
+// app.use('/api/customers', customerRouter);
 // app.use('/api/doctor', doctorRouter);
 
 mongoose
