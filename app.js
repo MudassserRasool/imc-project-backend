@@ -19,7 +19,9 @@ app.get('/', (req, res) => {
 // app.use('/api/doctor', doctorRouter);
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(
+    'mongodb+srv://imc:imc2024@cluster0.k5jgcnw.mongodb.net/?retryWrites=true&w=majority'
+  )
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log(
