@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 // app.use('/api/workouts', workoutRouter);
 // app.use('/api/users', userRouter);
-app.use('/api/orders', orderRouter);
+// app.use('/api/orders', orderRouter);
 // app.use('/api/customers', customerRouter);
 // app.use('/api/doctor', doctorRouter);
 
