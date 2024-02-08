@@ -1,35 +1,36 @@
+import multer from 'multer';
 import Doctor from '../models/doctorModel.js';
-// const upload = multer({ dest: 'uploads/' });
-// const addDoctor = async (req, res) => {
-//   const {
-//     name,
-//     specialization,
-//     qualification,
-//     experience,
-//     fees,
-//     rating,
-//     days,
-//     time,
-//   } = req.body;
-//   const image = req.file.path;
-//   try {
-//     await Doctor.create({
-//       image,
-//       name,
-//       specialization,
-//       qualification,
-//       experience,
-//       fees,
-//       rating,
-//       days,
-//       time,
-//     });
+const upload = multer({ dest: 'uploads/' });
+const addDoctor = async (req, res) => {
+  const {
+    name,
+    specialization,
+    qualification,
+    experience,
+    fees,
+    rating,
+    days,
+    time,
+  } = req.body;
+  const image = req.file.path;
+  try {
+    await Doctor.create({
+      image,
+      name,
+      specialization,
+      qualification,
+      experience,
+      fees,
+      rating,
+      days,
+      time,
+    });
 
-//     res.status(201).json({ message: 'Doctor added successfully' });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
+    res.status(201).json({ message: 'Doctor added successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 // get all doctors
 const getAllDoctors = async (req, res) => {
