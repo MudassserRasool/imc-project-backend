@@ -3,7 +3,6 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import customerRouter from './routes/coustomer.js';
-import doctorRouter from './routes/doctor.js';
 import orderRouter from './routes/order.js';
 import userRouter from './routes/user.js';
 import workoutRouter from './routes/workout.js';
@@ -21,7 +20,7 @@ app.use('/api/workouts', workoutRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/customers', customerRouter);
-app.use('/api/doctor', doctorRouter);
+// app.use('/api/doctor', doctorRouter);
 
 mongoose
   .connect(process.env.MONGODB_URI)
