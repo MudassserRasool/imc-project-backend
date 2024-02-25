@@ -2,8 +2,8 @@ import express from 'express';
 import {
   getAllOrders,
   getOrders,
-  placeOrder,
-} from '../controllers/orderControllers.js';
+} from '../controllers/admin/orderControllers.js';
+import { placeOrder } from '../controllers/mobile/orderControllers.js';
 
 const router = express.Router();
 // router.use(requireAuth);

@@ -5,14 +5,16 @@ import {
   deleteDoctor,
   getAllDoctors,
   updateDoctor,
-} from '../controllers/doctorController.js';
+} from '../controllers/admin/doctorController.js';
 
 const upload = multer({ dest: 'uploads/' });
 const router = express.Router();
+// router.post('/postDoctor', upload.single('image'), addDoctor);
 router.post('/postDoctor', upload.single('image'), addDoctor);
+
 // router.post(('/postDoctor', upload.single('image')), addDoctor);
 router.get('/getAllDoctors', getAllDoctors);
 router.delete('/deleteDoctor/:id', deleteDoctor);
-router.patch('/updateDoctor/:id', updateDoctor);
+router.patch('/updateDoctor/:id', upload.single('image'), updateDoctor);
 
 export default router;

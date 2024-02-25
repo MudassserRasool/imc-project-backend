@@ -1,6 +1,8 @@
+import mongoose from 'mongoose';
 import multer from 'multer';
-import Doctor from '../models/doctorModel.js';
+import Doctor from '../../models/common/doctorModel.js';
 const upload = multer({ dest: 'uploads/' });
+
 const addDoctor = async (req, res) => {
   const {
     name,
@@ -59,8 +61,8 @@ const deleteDoctor = async (req, res) => {
 
 // update doctor by id
 const updateDoctor = async (req, res) => {
+  const { id } = req.params;
   const {
-    image,
     name,
     specialization,
     qualification,
@@ -70,26 +72,31 @@ const updateDoctor = async (req, res) => {
     days,
     time,
   } = req.body;
-  const doctorId = req.params.id;
   try {
-    const doctor = await Doctor.findById(doctorId);
-    if (doctor) {
-      doctor.image = image;
-      doctor.name = name;
-      doctor.specialization = specialization;
-      doctor.qualification = qualification;
-      doctor.experience = experience;
-      doctor.fees = fees;
-      doctor.rating = rating;
-      doctor.days = days;
-      doctor.time = time;
-      const updatedDoctor = await doctor.save();
-      res.json(updatedDoctor);
-    } else {
-      res.status(404).json({ message: 'Doctor not found' });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).send(`No ambulance with id: ${id}`);
     }
+    const image = req.file.path;
+
+    const updatedDoctor = {
+      image,
+      name,
+      specialization,
+      qualification,
+      experience,
+      fees,
+      rating,
+      days,
+      time,
+    };
+    const createdDoctor = await Doctor.findByIdAndUpdate(id, updatedDoctor, {
+      new: true,
+    });
+    res.status(200).json(createdDoctor);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res
+      .status(500)
+      .json({ error: 'Server catch an error-----' + error.message });
   }
 };
 

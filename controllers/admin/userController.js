@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'; // vercel is not supporting it so use olde rversion
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import validator from 'validator';
-import userModel from '../models/userModel.js';
+import adminModal from '../../models/admin/adminModal.js';
 
 // function to generate token
 
@@ -15,7 +15,7 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   // found user with respect to email entered by user
-  const user = await userModel.findOne({ email });
+  const user = await adminModal.findOne({ email });
 
   if (!user) {
     return res.status(401).send({ message: 'Invalid User Email' });
@@ -49,7 +49,7 @@ const registerUser = async (req, res) => {
   }
 
   try {
-    const existingUser = await userModel.findOne({ email });
+    const existingUser = await adminModal.findOne({ email });
     if (existingUser) {
       return res
         .status(400)
@@ -69,7 +69,7 @@ const registerUser = async (req, res) => {
     }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
-    const user = new userModel({
+    const user = new adminModal({
       name,
       email,
       phone,
@@ -94,7 +94,7 @@ const getRegistrationInfo = async (req, res) => {
     return res.status(404).send(`No workout with id: ${email}`);
   }
   try {
-    const user = await userModel.findOne({ email });
+    const user = await adminModal.findOne({ email });
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -107,7 +107,7 @@ const updateRegistrationInfo = async (req, res) => {
   const { email } = req.params;
   const { name, address, phone } = req.body;
   try {
-    const user = await userModel.findOneAndUpdate(
+    const user = await adminModal.findOneAndUpdate(
       { email },
       { name, address, phone }
     );
@@ -120,7 +120,7 @@ const updateRegistrationInfo = async (req, res) => {
 // get all users
 const getAllUsers = async (req, res) => {
   try {
-    const users = await userModel.find();
+    const users = await adminModal.find();
     res.status(200).json(users);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -134,8 +134,8 @@ const deleteUser = async (req, res) => {
   //   return res.status(404).send(`No user with id: ${id}`);
   // }
   try {
-    const user = await userModel.find();
-    await userModel.findByIdAndDelete(id);
+    const user = await adminModal.find();
+    await adminModal.findByIdAndDelete(id);
     res.json({ message: 'User deleted successfully.' + user });
   } catch (error) {
     res.status(404).json({ message: error.message });
