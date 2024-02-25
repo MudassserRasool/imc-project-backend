@@ -33,13 +33,13 @@ app.use('/api/overview', overviewRouter);
 // const environment = process.env.NODE_ENV;
 const port = process.env.PORT || 3000;
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'development') {
   mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => {
-      server.listen(port, () => {
+      app.listen(port, () => {
         console.log(
-          `Server running on port ${port} and environment is production`
+          `Connected to mongodb and running on port ${port} and environment is development`
         );
       });
     })
@@ -50,9 +50,9 @@ if (process.env.NODE_ENV === 'production') {
   mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => {
-      app.listen(port, () => {
+      server.listen(port, () => {
         console.log(
-          `Connected to mongodb and running on port ${port} and environment is development`
+          `Server running on port ${port} and environment is production`
         );
       });
     })
