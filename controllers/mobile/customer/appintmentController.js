@@ -10,9 +10,6 @@ const postAppointment = async (req, res) => {
       name,
       phone,
       doctor,
-      disease,
-      date,
-      time,
     });
     const savedOrder = await order.save();
     res.status(201).json(savedOrder);
