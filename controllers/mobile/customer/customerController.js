@@ -78,4 +78,38 @@ const registerCustomer = async (req, res) => {
   }
 };
 
-export { loginCustomer, registerCustomer };
+// get profile of user with it email
+const getProfile = async (req, res) => {
+  const { email } = req.params;
+  try {
+    const user = await customerModal.findOne({ email: email });
+
+    if (!user) {
+      return res.status(401).send({ message: 'Invalid User Email' });
+    }
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
+};
+
+// now update name , phon and adress of that user
+const updateProfile = async (req, res) => {
+  const { email } = req.params;
+  const { name, phone, address } = req.body;
+  try {
+    const user = await customerModal.findOne({ email: email });
+    if (!user) {
+      return res.status(401).send({ message: 'Invalid User Email' });
+    }
+    user.name = name;
+    user.phone = phone;
+    user.address = address;
+    await user.save();
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
+};
+
+export { getProfile, loginCustomer, registerCustomer, updateProfile };

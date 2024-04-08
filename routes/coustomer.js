@@ -6,8 +6,10 @@ import { getAllFeedbacks } from '../controllers/admin/customer/feedbackControlle
 import { deleteCustomer } from '../controllers/common/customerController.js';
 import { postAppointment } from '../controllers/mobile/customer/appintmentController.js';
 import {
+  getProfile,
   loginCustomer,
   registerCustomer,
+  updateProfile,
 } from '../controllers/mobile/customer/customerController.js';
 import { postFeedback } from '../controllers/mobile/customer/feedbackController.js';
 
@@ -23,6 +25,8 @@ router.post('/registerCustomer', registerCustomer);
 router.post('/loginCustomer', loginCustomer);
 router.post('/postFeedback', postFeedback);
 router.post('/postAppointment', postAppointment);
+router.get('/current/:email', getProfile);
+router.patch('/update/:email', updateProfile);
 
 // common
 router.delete('/deleteCustomer/:id', deleteCustomer);
