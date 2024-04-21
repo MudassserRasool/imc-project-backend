@@ -1,14 +1,16 @@
 import express from 'express';
+import multer from 'multer';
 import {
   getAllOrders,
   getOrders,
 } from '../controllers/admin/orderControllers.js';
 import { placeOrder } from '../controllers/mobile/orderControllers.js';
+const upload = multer({ dest: 'uploads/' });
 
 const router = express.Router();
 // router.use(requireAuth);
 
-router.post('/', placeOrder);
+router.post('/orderMedicine', upload.single('image'), placeOrder);
 router.get('/user/:email', getOrders);
 router.get('/', getAllOrders);
 

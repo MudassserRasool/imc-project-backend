@@ -2,19 +2,10 @@ import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema(
   {
-    items: [
-      {
-        name: String,
-        quantity: Number,
-        price: Number,
-      },
-    ],
-    totalPrice: Number,
-    orderDate: { type: Date, default: Date.now },
-    address: String,
-    phoneNumber: String,
-    userName: String,
-    email: String,
+    image: { type: String },
+    name: { required: true, type: String },
+    phone: { required: true, type: String },
+    address: { required: true, type: String },
   },
   {
     timestamps: true,

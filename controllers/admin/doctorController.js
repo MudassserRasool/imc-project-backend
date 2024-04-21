@@ -72,23 +72,25 @@ const updateDoctor = async (req, res) => {
     days,
     time,
   } = req.body;
+  const updatedDoctor = {
+    name,
+    specialization,
+    qualification,
+    experience,
+    fees,
+    rating,
+    days,
+    time,
+  };
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).send(`No ambulance with id: ${id}`);
     }
-    const image = req.file.path;
+    // const image = req.file.path;
+    if (req.file) {
+      updatedDoctor.image = req.file.path;
+    }
 
-    const updatedDoctor = {
-      image,
-      name,
-      specialization,
-      qualification,
-      experience,
-      fees,
-      rating,
-      days,
-      time,
-    };
     const createdDoctor = await Doctor.findByIdAndUpdate(id, updatedDoctor, {
       new: true,
     });
