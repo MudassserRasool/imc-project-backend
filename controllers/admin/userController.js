@@ -7,7 +7,7 @@ import adminModal from '../../models/admin/adminModal.js';
 // function to generate token
 
 const generateToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+  return jwt.sign({ _id }, process.env.JWT_SECRET_KEY, { expiresIn: '30d' });
 };
 
 // login user controller to save user data in mongoose database

@@ -23,6 +23,5 @@ app.use('/api/customers', customerRouter);
 app.use('/api/doctor', doctorRouter);
 app.use('/api/ambulance', ambulanceRouter);
 app.use('/api/overview', overviewRouter);
-const port = process.env.PORT || 3000;
 
 connectDb();
